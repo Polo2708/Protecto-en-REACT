@@ -1,0 +1,32 @@
+.productos-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.producto-item {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 200px;
+}
+
+.producto-item img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.carrito-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.carrito-item h2 {
+  margin: 0;
+}
+
+.carrito-item button {
+  margin: 0 5px;
+}

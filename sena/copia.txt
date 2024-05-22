@@ -1,0 +1,23 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavigationBar from './components/Navbar';
+import Productos from './components/Productos';
+import Carrito from './components/Carrito';
+import AgregarProducto from './components/AgregarProducto';
+
+function App() {
+  return (
+    <Router>
+      <div>
+        <NavigationBar />
+        <Routes>
+          <Route path="/" element={<Productos />} />
+          <Route path="/carrito" element={<Carrito />} />
+          <Route path="/agregar-producto" element={<AgregarProducto />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
