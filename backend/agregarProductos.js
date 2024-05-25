@@ -1,4 +1,3 @@
-// backend/agregarProductos.js
 const fs = require('fs');
 const path = require('path');
 const db = require('./db'); // Asegúrate de que tu archivo db.js esté correctamente configurado

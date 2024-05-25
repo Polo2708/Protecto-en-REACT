@@ -1,37 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, Row, Col, Container } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col } from 'react-bootstrap';
+import { CarritoContext } from '../CarritoContext';  // Ajusta la ruta según la estructura de tu proyecto
 
 const Productos = () => {
+  //Define un estado para almacenar la lista de productos
   const [productos, setProductos] = useState([]);
+  //Obtener la funcion addToCart del contexto del carrito
+  const { addToCart } = useContext(CarritoContext);
 
+  //useEffect para obtener los productos cuando el componente se monta 
   useEffect(() => {
     const fetchProductos = async () => {
       try {
+        //Realizar una solicitud GET a la API para obtener los productos
         const response = await axios.get('http://localhost:5000/api/productos');
+        //Actualizar el estado local con los datos obtenidos
         setProductos(response.data);
       } catch (error) {
         console.error('Error al obtener productos:', error);
       }
     };
 
+    //LLamar a la funcion fetchProductos
     fetchProductos();
   }, []);
 
   return (
     <Container>
-      <h1 className="my-4">Productos</h1>
       <Row>
-        {productos.map((producto) => (
-          <Col key={producto.id} sm={12} md={6} lg={4} xl={3} className="mb-4">
+        {productos.map(producto => (
+          <Col key={producto.id} md={4} className="mb-4">
             <Card>
-              <Card.Img variant="top" src={`http://localhost:5000${producto.imagen}`} />
+              <Card.Img variant="top" src={`http://localhost:5000/uploads/${producto.imagen}`} />
               <Card.Body>
                 <Card.Title>{producto.nombre}</Card.Title>
                 <Card.Text>{producto.descripcion}</Card.Text>
-                <Card.Text>Precio: ${producto.precio}</Card.Text>
-                <Card.Text>Stock: {producto.stock}</Card.Text>
-                <Card.Text>Marca: {producto.marca}</Card.Text>
+                <Card.Text>${producto.precio}</Card.Text>
+                <Button variant="primary" onClick={() => addToCart(producto)}>Agregar al Carrito</Button>
               </Card.Body>
             </Card>
           </Col>

@@ -1,31 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Container, ListGroup, Button, Row, Col } from 'react-bootstrap';
+import { CarritoContext } from '../CarritoContext'; // Asegúrate de que esta ruta sea correcta
 
 const Carrito = () => {
-  const [items, setItems] = useState([
-    { id: 1, nombre: 'Balón de fútbol', precio: 29.99, cantidad: 1 },
-    { id: 2, nombre: 'Zapatos deportivos', precio: 59.99, cantidad: 2 },
-  ]);
+  //Obtener el estado del carrito y las funciones para modificarlo
+  const { carrito, incrementarCantidad, decrementarCantidad, eliminarItem } = useContext(CarritoContext);
 
-  const incrementarCantidad = (id) => {
-    setItems(items.map(item => item.id === id ? { ...item, cantidad: item.cantidad + 1 } : item));
-  };
-
-  const decrementarCantidad = (id) => {
-    setItems(items.map(item => item.id === id && item.cantidad > 1 ? { ...item, cantidad: item.cantidad - 1 } : item));
-  };
-
-  const eliminarItem = (id) => {
-    setItems(items.filter(item => item.id !== id));
-  };
-
-  const total = items.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  //Calcular el total del carrito sumando su precio y cada producto multiplicarlo popr su cantidad
+  const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
 
   return (
     <Container>
       <h1 className="my-4">Carrito de Compras</h1>
       <ListGroup>
-        {items.map(item => (
+        {carrito.map(item => (
           <ListGroup.Item key={item.id}>
             <Row className="align-items-center">
               <Col md={4}>

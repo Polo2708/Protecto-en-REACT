@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Form, Button, Container } from 'react-bootstrap';
 
 const AgregarProducto = () => {
+  //Definicion de estado para cada campo en el formulario
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [precio, setPrecio] = useState('');
@@ -10,35 +11,30 @@ const AgregarProducto = () => {
   const [marca, setMarca] = useState('');
   const [imagen, setImagen] = useState(null);
 
+  //Menejar el envio del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Subir la imagen primero
+      //Crear un objeto FormData para enviar los datos del producto
       const formData = new FormData();
       formData.append('imagen', imagen);
+      formData.append('nombre', nombre);
+      formData.append('descripcion', descripcion);
+      formData.append('precio', precio);
+      formData.append('stock', stock);
+      formData.append('marca', marca);
 
-      const uploadResponse = await axios.post('http://localhost:5000/upload', formData, {
+      //Enviar los datos a la API
+      await axios.post('http://localhost:5000/api/productos', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      const imagePath = uploadResponse.data.imagePath;
-
-      // Luego, enviar los datos del producto junto con la ruta de la imagen
-      const nuevoProducto = {
-        nombre,
-        descripcion,
-        precio,
-        stock,
-        marca,
-        imagen: imagePath,
-      };
-
-      await axios.post('http://localhost:5000/api/productos', nuevoProducto);
-
+      //Mostrar un mensaje de éxito
       alert('Producto agregado exitosamente');
-      // Restablecer el formulario
+
+      //Restablecer los campos del formulario
       setNombre('');
       setDescripcion('');
       setPrecio('');
@@ -46,6 +42,8 @@ const AgregarProducto = () => {
       setMarca('');
       setImagen(null);
     } catch (error) {
+
+      //Mostrar un mensaje de error en caso de fallo
       console.error('Error al agregar producto:', error);
       alert('Error al agregar producto');
     }

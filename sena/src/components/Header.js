@@ -7,8 +7,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 const Header = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
-      <Container>
+    //Navbar de Bootstrap
+    <Navbar bg="primary" variant="dark" expand="lg">
+      <Container>{/** Contenedor de Bootstrap para alinear el contenido */}
         <Navbar.Brand href="/">Sena Tienda Deportiva</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

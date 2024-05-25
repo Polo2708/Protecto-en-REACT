@@ -1,25 +1,49 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import NavigationBar from './components/Navbar';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import Productos from './components/Productos';
 import AgregarProducto from './components/AgregarProducto';
+import Navigation from './components/Navbar';
+import Carrusel from './components/Carrusel';
 import Carrito from './components/Carrito';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importar Bootstrap CSS
-import './App.css';
+import { CarritoProvider } from './CarritoContext';
+import Footer from './components/Footer';
 
-const App = () => {
+//Componente principal de la aplicación
+function App() {
   return (
-    <Router>
-      <div>
-        <NavigationBar />
+    <CarritoProvider>
+      <Router>
+        {/**Barra de navegacion*/}
+        <Navigation />
+        <MainContent />
+        {/** Pie de pagina */}
+        <Footer />
+      </Router>
+    </CarritoProvider>
+  );
+}
+
+//Componente para manejar el contenido principal
+function MainContent() {
+  const location = useLocation();
+
+  return (
+    <>
+    {/** Mostrar el carrusel colo en la pagina principal */}
+      {location.pathname === '/' && (
+          <Carrusel />
+      )}
+      <Container>
+        {/** Definicion de las rutas de la aplicacion */}
         <Routes>
           <Route path="/" element={<Productos />} />
-          <Route path="/agregar" element={<AgregarProducto />} />
+          <Route path="/agregar-producto" element={<AgregarProducto />} />
           <Route path="/carrito" element={<Carrito />} />
         </Routes>
-      </div>
-    </Router>
+      </Container>
+    </>
   );
-};
+}
 
 export default App;

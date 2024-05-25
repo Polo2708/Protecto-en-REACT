@@ -1,32 +1,38 @@
+/*Estilos para la lista de productos*/
 .productos-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: flex;/*Hace que los elementos se muestren en linea*/
+  flex-wrap: wrap;/*Permite que los elementos se envuelvan cuando no haya espacio*/
+  gap: 20px;/*Espacio entre los elementos */
 }
 
+/*Estilos para cada elemento de producto*/
 .producto-item {
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  width: 200px;
+  border: 1px solid #ddd;/**/
+  padding: 20px;/**/
+  border-radius: 8px;/**/
+  text-align: center;/**/
+  width: 200px;/**/
 }
 
+/*Estilo para la imagen dentro de un elemento de producto*/
 .producto-item img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 10px;
+  max-width: 100%;/*Ancho maximo de la imagen*/
+  height: auto;/*Altura automatica para mantener la proporcion de la imagen*/
+  margin-bottom: 10px;/*Espacio inferior entre la imagen y otros elementos*/
 }
 
+/*Estilos para cada elemento del carrito*/
 .carrito-item {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
+  border-bottom: 1px solid #ddd;/*Borde inferior del elemento*/
+  padding: 10px 0;/*Espacio interno del elemento*/
 }
 
+/*Estilo para el titulo dentro de un elemento del carrito*/
 .carrito-item h2 {
-  margin: 0;
+  margin: 0;/*Eliminar el margen del titulo*/
 }
 
+/*Estilos para los botones dentro de un elemento del carrito*/
 .carrito-item button {
-  margin: 0 5px;
+  margin: 0 5px;/*Margen horizontal entre los botones*/
 }
